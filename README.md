@@ -16,9 +16,7 @@ Add Shadcn UI components:
 npx shadcn-ui@latest add card button popover calendar
 ```
 
-Configure environment variables for Supabase and Stripe in a `.env.local` file.
-Example variables:
-
+Configure environment variables for Supabase and Stripe in a `.env.local` file. A `.env.example` file is provided with all necessary variables. Example minimal values:
 ```
 SUPABASE_URL="https://your-project.supabase.co"
 SUPABASE_ANON_KEY="public-anon-key"
