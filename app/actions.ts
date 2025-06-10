@@ -13,6 +13,14 @@ export async function createBookingAndPay(formData: FormData) {
   const startDate = formData.get('startDate') as string | null;
   const endDate = formData.get('endDate') as string | null;
 
+  const { data: room } = await supabase
+    .from('rooms')
+    .select('price_monthly')
+    .eq('id', roomId)
+    .single();
+
+  const priceMonthly = room?.price_monthly ?? 0;
+
   const { data: booking } = await supabase
     .from('bookings')
     .insert({ tenant_id: null, room_id: roomId, start_date: startDate, end_date: endDate, status: 'pending' })
@@ -25,7 +33,7 @@ export async function createBookingAndPay(formData: FormData) {
         price_data: {
           currency: 'eur',
           product_data: { name: `Booking for room ${roomId}` },
-          unit_amount: 100 * 100, // placeholder price
+          unit_amount: priceMonthly * 100,
         },
         quantity: 1,
       },

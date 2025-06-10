@@ -27,3 +27,14 @@ Configure environment variables for Supabase and Stripe in a `.env.local` file.
 - `app/room/[id]/page.tsx` – Server page showing room details with booking widget.
 - `app/reserve/[roomId]/page.tsx` – Client page for reservation and payment.
 - `app/actions.ts` – Server action to create a booking and start a Stripe Checkout session.
+
+## Deployment with Coolify
+
+Because this project uses **Next.js**, it needs to run as a Node.js application when deployed.
+
+1. Ensure `package.json` contains the standard Next.js scripts (`dev`, `build`, `start`).
+2. Push your code to GitHub with `.env.local` excluded.
+3. In Coolify, create a new **Application** and connect your repository.
+4. Use `npm run build` as the build command and `npm run start` as the start command.
+5. Define environment variables such as `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `PORT`.
+6. Deploy and monitor the logs in Coolify to verify the app starts correctly.

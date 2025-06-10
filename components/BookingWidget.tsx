@@ -16,7 +16,16 @@ export default function BookingWidget({ price_monthly, deposit = 0, roomId }: Pr
   const [moveInDate, setMoveInDate] = useState<Date | undefined>();
   const [moveOutDate, setMoveOutDate] = useState<Date | undefined>();
 
-  const totalPrice = price_monthly + (deposit || 0);
+  function monthsBetween(start: Date, end: Date) {
+    return Math.max(
+      1,
+      end.getMonth() - start.getMonth() + 12 * (end.getFullYear() - start.getFullYear())
+    );
+  }
+
+  const totalPrice = moveInDate && moveOutDate
+    ? price_monthly * monthsBetween(moveInDate, moveOutDate) + (deposit || 0)
+    : price_monthly + (deposit || 0);
 
   return (
     <div className="space-y-4 p-4 border rounded sticky top-4">
